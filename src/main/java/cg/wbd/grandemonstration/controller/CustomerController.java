@@ -46,8 +46,14 @@ public class CustomerController {
 
     @PostMapping
     public ModelAndView updateCustomer(Customer customer) {
-        customerService.save(customer);
-        return new ModelAndView("redirect:/customers");
+        try {
+            customerService.save(customer);
+            return new ModelAndView("redirect:/customers");
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/customers/" + customer.getId());
+        }
+//        customerService.save(customer);
+//        return new ModelAndView("redirect:/customers");
     }
 
     private Page<Customer> getPage(Pageable pageInfo) {
@@ -57,4 +63,9 @@ public class CustomerController {
     private Page<Customer> search(Optional<String> s, Pageable pageInfo) {
         return customerService.search(s.get(), pageInfo);
     }
+
+//    @Override
+//    public Page<Customer> findAll(Pageable pageInfo) throws Exception {
+//        if (true) throw new Exception("a dummy exception");
+//    }
 }

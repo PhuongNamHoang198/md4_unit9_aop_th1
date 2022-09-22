@@ -10,13 +10,13 @@ import java.util.Optional;
 public interface CustomerService {
     List<Customer> findAll();
 
-    Page<Customer> findAll(Pageable pageInfo);
+    Page<Customer> findAll(Pageable pageInfo) throws Exception;
 
     List<Customer> search(String keyword);
 
     Page<Customer> search(String keyword, Pageable pageInfo);
 
-    Optional<Customer> findOne(Long id);
+    Optional<Customer> findOne(Long id) throws Exception;
 
     Customer save(Customer customer);
 
